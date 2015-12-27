@@ -205,12 +205,16 @@ bindsym $mod+F2 move workspace to output right
 # bindsym XF86AudioRaiseVolume exec /usr/bin/pactl set-sink-volume 1 -- '+5%' && notify-send `(pactl list sinks | grep "Volume: 0:")| awk '{print $3}'`
 # bindsym XF86AudioMute exec /usr/bin/pactl set-sink-volume 1 0
 
+bindsym XF86AudioLowerVolume exec /usr/bin/pactl set-sink-volume 1 -- '-5%'
+bindsym XF86AudioRaiseVolume exec /usr/bin/pactl set-sink-volume 1 -- '+5%'
+bindsym XF86AudioMute exec /usr/bin/pactl set-sink-volume 1 0
+bindsym XF86MonBrightnessUp exec /usr/bin/xbacklight -inc 10
+bindsym XF86MonBrightnessDown exec /usr/bin/xbacklight -dec 5
+
 exec --no-startup-id nm-applet
-#exec --no-startup-id "setxkbmap -model pc105 -layout hr,us -option grp:alt_shift_toggle"
 exec --no-startup-id gnome-settings-daemon
 exec --no-startup-id dropbox start
 
 exec google-chrome
 
-#exec --no-startup-id feh --bg-scale ~/Pictures/i3wm_wallpaper.png
 
