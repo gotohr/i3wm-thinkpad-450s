@@ -1,0 +1,3 @@
+setxkbmap -model pc105 -layout hr,us -option grp:alt_shift_toggle
+feh --bg-scale ~/Pictures/i3wm_wallpaper.png
+
