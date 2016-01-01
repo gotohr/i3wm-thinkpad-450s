@@ -232,7 +232,8 @@ bindsym $mod+i exec xcalib -invert -alter
 bindsym $mod+F1 move workspace to output left
 bindsym $mod+F2 move workspace to output right
 
-bindsym F12 exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -dmenu'
+#bindsym F12 exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -dmenu'
+bindsym F12 exec --no-startup-id rofi -show window -font "Droid Sans Mono 14" -fg "#cc5050" -bg "#222211" -hlfg "#99b964" -hlbg "#000000" -o 85
 
 # bindsym XF86AudioLowerVolume exec /usr/bin/pactl set-sink-volume 1 -- '-5%' && notify-send `(pactl list sinks | grep "Volume: 0:")| awk '{print $3}'`
 # bindsym XF86AudioRaiseVolume exec /usr/bin/pactl set-sink-volume 1 -- '+5%' && notify-send `(pactl list sinks | grep "Volume: 0:")| awk '{print $3}'`
@@ -249,7 +250,7 @@ exec --no-startup-id gnome-keyring-daemon
 exec --no-startup-id gnome-settings-daemon
 exec --no-startup-id nm-applet
 exec --no-startup-id dropbox start
+exec --no-startup-id feh --bg-scale ~/Pictures/i3wm_wallpaper.jpg
 
 exec google-chrome
-
 
