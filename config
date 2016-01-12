@@ -2,6 +2,7 @@ set $mod Mod4
 set $i3_path /home/cljubo/.i3
 
 set $OUTPUT_E DP2
+set $OUTPUT_DP DP1
 set $OUTPUT_I eDP1
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -33,7 +34,7 @@ bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 bindsym $mod+j focus left
 bindsym $mod+k focus down
 bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+ccaron focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -45,7 +46,7 @@ bindsym $mod+Right focus right
 bindsym $mod+Shift+j move left
 bindsym $mod+Shift+k move down
 bindsym $mod+Shift+l move up
-bindsym $mod+Shift+colon move right
+bindsym $mod+Shift+ccaron move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -150,12 +151,16 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-set $mode_external_pos External screen position: ↑, →, ↓, ←
+set $mode_external_pos External screen position: ↑, →, ↓, ← (Shift for DisplayPort monitor)
 mode "$mode_external_pos" {
-        bindsym Left    exec xrandr --output $OUTPUT_E --auto --left-of $OUTPUT_I
-        bindsym Right   exec xrandr --output $OUTPUT_E --auto --right-of $OUTPUT_I
-        bindsym Up      exec xrandr --output $OUTPUT_E --auto --above $OUTPUT_I
-        bindsym Down    exec xrandr --output $OUTPUT_E --auto --below $OUTPUT_I
+        bindsym Left		exec xrandr --output $OUTPUT_E --auto --left-of $OUTPUT_I
+        bindsym Right		exec xrandr --output $OUTPUT_E --auto --right-of $OUTPUT_I
+        bindsym Up		exec xrandr --output $OUTPUT_E --auto --above $OUTPUT_I
+        bindsym Down		exec xrandr --output $OUTPUT_E --auto --below $OUTPUT_I
+        bindsym Shift+Left	exec xrandr --output $OUTPUT_DP --auto --left-of $OUTPUT_I
+        bindsym Shift+Right	exec xrandr --output $OUTPUT_DP --auto --right-of $OUTPUT_I
+        bindsym Shift+Up	exec xrandr --output $OUTPUT_DP --auto --above $OUTPUT_I
+        bindsym Shift+Down	exec xrandr --output $OUTPUT_DP --auto --below $OUTPUT_I
         # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
@@ -184,26 +189,17 @@ bar {
 	
 	# $i3-theme-bar
 	colors {
-       		# <bar>
-       		background #47172c
-       		separator  #f37320
-       		statusline #aea79f
+		# <bar>
+		background #47172c
+		separator  #f37320
+		statusline #aea79f
 
-       		# <workclass>       <border> <backgr.> <text>
-       		focused_workspace   #f47f31 #f37320 #ffffff
-       		active_workspace    #6c2e55 #61194a #ffffff
-       		inactive_workspace  #542937 #47172c #aea79f
-       		urgent_workspace    #f0be50 #efb73e #ffffff
+		# <workclass>       <border> <backgr.> <text>
+		focused_workspace   #f47f31 #f37320 #ffffff
+		active_workspace    #6c2e55 #61194a #ffffff
+		inactive_workspace  #542937 #47172c #aea79f
+		urgent_workspace    #f0be50 #efb73e #0000ff
 	}
-
-# custom bar stuff - not working
-#	order += "volume master"
-#	volume master {
-#  		format = "♪: %volume"
-#  		device = "default"
-#		mixer = "Master"
-# 		mixer_idx = 0
-#	}
 
 }
 
@@ -229,8 +225,10 @@ bindsym Mod1+Shift+Tab focus left
 bindsym $mod+Tab workspace next
 bindsym $mod+Shift+Tab workspace prev
 bindsym $mod+i exec xcalib -invert -alter
-bindsym $mod+F1 move workspace to output left
-bindsym $mod+F2 move workspace to output right
+bindsym $mod+Mod1+Left move workspace to output left
+bindsym $mod+Mod1+Right move workspace to output right
+bindsym $mod+Mod1+Up move workspace to output up
+bindsym $mod+Mod1+Down move workspace to output down
 
 #bindsym F12 exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -dmenu'
 bindsym F12 exec --no-startup-id rofi -show window -font "Droid Sans Mono 14" -fg "#cc5050" -bg "#222211" -hlfg "#99b964" -hlbg "#000000" -o 85
