@@ -157,10 +157,10 @@ mode "$mode_external_pos" {
         bindsym Right		exec xrandr --output $OUTPUT_E --auto --right-of $OUTPUT_I
         bindsym Up		exec xrandr --output $OUTPUT_E --auto --above $OUTPUT_I
         bindsym Down		exec xrandr --output $OUTPUT_E --auto --below $OUTPUT_I
-        bindsym Shift+Left	exec xrandr --output $OUTPUT_DP --auto --left-of $OUTPUT_I
-        bindsym Shift+Right	exec xrandr --output $OUTPUT_DP --auto --right-of $OUTPUT_I
-        bindsym Shift+Up	exec xrandr --output $OUTPUT_DP --auto --above $OUTPUT_I
-        bindsym Shift+Down	exec xrandr --output $OUTPUT_DP --auto --below $OUTPUT_I
+        bindsym Shift+Left	exec xrandr --output $OUTPUT_DP --auto --left-of $OUTPUT_E
+        bindsym Shift+Right	exec xrandr --output $OUTPUT_DP --auto --right-of $OUTPUT_E
+        bindsym Shift+Up	exec xrandr --output $OUTPUT_DP --auto --above $OUTPUT_E
+        bindsym Shift+Down	exec xrandr --output $OUTPUT_DP --auto --below $OUTPUT_E
         # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
@@ -171,7 +171,7 @@ set $mode_screen Multi-monitor setup: (e)xternal only, (i)nternal only, (c)lone,
 mode "$mode_screen" {
     bindsym c exec --no-startup-id xrandr --output $OUTPUT_E --auto --output $OUTPUT_I --auto
     bindsym e exec --no-startup-id xrandr --output $OUTPUT_E --auto --output $OUTPUT_I --off
-    bindsym i exec --no-startup-id xrandr --output $OUTPUT_I --auto --output $OUTPUT_E --off
+    bindsym i exec --no-startup-id xrandr --output $OUTPUT_I --auto --output $OUTPUT_E --off && xrandr --output $OUTPUT_DP --off
     bindsym s exec --no-startup-id xrandr --output $OUTPUT_I --auto && xrandr --output $OUTPUT_E --right-of $OUTPUT_I
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -224,7 +224,12 @@ bindsym Mod1+Tab focus right
 bindsym Mod1+Shift+Tab focus left
 bindsym $mod+Tab workspace next
 bindsym $mod+Shift+Tab workspace prev
-bindsym $mod+i exec xcalib -invert -alter
+
+# https://github.com/zoltanp/xrandr-invert-colors
+bindsym $mod+i exec xrandr-invert-colors -s 0
+bindsym $mod+Control+i exec xrandr-invert-colors -s 1
+bindsym $mod+Control+Mod1+i exec xrandr-invert-colors -s 2
+
 bindsym $mod+Mod1+Left move workspace to output left
 bindsym $mod+Mod1+Right move workspace to output right
 bindsym $mod+Mod1+Up move workspace to output up
@@ -250,5 +255,10 @@ exec --no-startup-id nm-applet
 exec --no-startup-id dropbox start
 exec --no-startup-id feh --bg-scale ~/Pictures/i3wm_wallpaper.jpg
 
+exec clipit
+
 exec google-chrome
 
+new_window pixel 3
+#hide_edge_borders none|vertical|horizontal|both
+#hide_edge_borders both
