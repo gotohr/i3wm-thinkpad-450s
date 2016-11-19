@@ -1,0 +1,45 @@
+{
+    "border": "normal",
+    "floating": "auto_off",
+    "layout": "splith",
+    "percent": null,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "normal",
+            "current_border_width": 2,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 1060,
+               "width": 1916,
+               "x": 4,
+               "y": 18
+            },
+            "name": "i3: Layout saving in i3 - Google Chrome",
+            "percent": 0.65,
+            "swallows": [
+		{"class": "^google-chrome$"},
+		{"class": "^jetbrains-idea-ce$"}
+            ],
+            "type": "con"
+        },
+        {
+            "border": "normal",
+            "current_border_width": 2,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 431,
+               "width": 655,
+               "x": 0,
+               "y": 0
+            },
+            "name": "i3-save-tree --workspace 1 > ./one_screen_2in3.json",
+            "percent": 0.35,
+            "swallows": [
+		{"class": "^X-terminal-emulator$"}
+            ],
+            "type": "con"
+        }
+    ]
+}
+

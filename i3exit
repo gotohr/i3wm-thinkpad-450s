@@ -1,7 +1,9 @@
 #!/bin/sh
 
 lock() {
-    i3lock -n -ti /home/cljubo/Pictures/i3wm_lock.png
+#    i3lock -n -ti /home/cljubo/Pictures/i3wm_lock.png
+#    i3lock -n -ti /home/cljubo/Pictures/windoge.png
+    i3lock -n -ti /home/cljubo/Pictures/lock_screen/i3wm_lock.png
 }
 
 case "$1" in
