@@ -19,7 +19,8 @@ font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec terminator
+#i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+q kill
@@ -187,27 +188,27 @@ bindsym $mod+Shift+m mode "$mode_screen"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-	position bottom
-	# mode hide
-	tray_output eDP1
-        status_command i3status -c ~/.i3/i3status.conf
+#bar {
+#	position bottom
+#	# mode hide
+#	tray_output eDP1
+#       status_command i3status -c ~/.i3/i3status.conf
 	
 	# $i3-theme-bar
-	colors {
+#	colors {
 		# <bar>
-		background #47172c
-		separator  #f37320
-		statusline #aea79f
+#		background #47172c
+#		separator  #f37320
+#		statusline #aea79f
 
 		# <workclass>       <border> <backgr.> <text>
-		focused_workspace   #f47f31 #f37320 #ffffff
-		active_workspace    #6c2e55 #61194a #ffffff
-		inactive_workspace  #542937 #47172c #aea79f
-		urgent_workspace    #f0be50 #efb73e #0000ff
-	}
+#		focused_workspace   #f47f31 #f37320 #ffffff
+#		active_workspace    #6c2e55 #61194a #ffffff
+#		inactive_workspace  #542937 #47172c #aea79f
+#		urgent_workspace    #f0be50 #efb73e #0000ff
+#	}
 
-}
+#}
 
 # $i3-theme-window
 # <clientclass>         <border> <backgr.> <text> <indicator>
@@ -252,27 +253,19 @@ bindsym F12 exec --no-startup-id rofi -show window -font "Droid Sans Mono 14" -f
 # bindsym XF86AudioRaiseVolume exec /usr/bin/pactl set-sink-volume 1 -- '+5%' && notify-send `(pactl list sinks | grep "Volume: 0:")| awk '{print $3}'`
 # bindsym XF86AudioMute exec /usr/bin/pactl set-sink-volume 1 0
 
-bindsym XF86AudioLowerVolume exec --no-startup-id /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ -5%
-bindsym XF86AudioRaiseVolume exec --no-startup-id /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym XF86AudioMute exec --no-startup-id /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ toggle
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master playback 2-
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master playback 2+
+bindsym XF86AudioMute exec --no-startup-id amixer set Master toggle
 
-bindsym XF86MonBrightnessUp exec /usr/bin/xbacklight -inc 10
-bindsym XF86MonBrightnessDown exec /usr/bin/xbacklight -dec 10
+bindsym XF86MonBrightnessUp exec --no-startup-id /usr/bin/xbacklight -inc 10
+bindsym XF86MonBrightnessDown exec --no-startup-id /usr/bin/xbacklight -dec 10
 
-exec --no-startup-id gnome-keyring-daemon
-exec --no-startup-id gnome-settings-daemon
-exec --no-startup-id nm-applet
-exec --no-startup-id dropbox start
+# exec --no-startup-id nm-applet
+# exec --no-startup-id dropbox start
 exec --no-startup-id feh --bg-scale ~/Pictures/i3wm_wallpaper.jpg
 
 exec clipit
 
 exec google-chrome
 
-#new_window pixel 3
-#hide_edge_borders none|vertical|horizontal|both
-#hide_edge_borders both
-
-#bindsym $mod+n exec --no-startup-id "i3-msg 'workspace 3; append_layout $i3_path/layouts/one_screen_2in3.json'"
-bindsym $mod+n exec --no-startup-id $i3_path/layout.sh 
-#bindsym $mod+n exec --no-startup-id $i3_path/layout_idea.sh 
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
