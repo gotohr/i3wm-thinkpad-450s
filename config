@@ -260,8 +260,8 @@ bindsym XF86AudioMute exec --no-startup-id amixer set Master toggle
 bindsym XF86MonBrightnessUp exec --no-startup-id /usr/bin/xbacklight -inc 10
 bindsym XF86MonBrightnessDown exec --no-startup-id /usr/bin/xbacklight -dec 10
 
-# exec --no-startup-id nm-applet
-# exec --no-startup-id dropbox start
+exec --no-startup-id nm-applet
+exec --no-startup-id dropbox start
 exec --no-startup-id feh --bg-scale ~/Pictures/i3wm_wallpaper.jpg
 
 exec clipit
@@ -269,3 +269,6 @@ exec clipit
 exec google-chrome
 
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+#exec /usr/bin/compton --config /home/joe/.compton.conf~.i3/config
+#exec /usr/bin/compton

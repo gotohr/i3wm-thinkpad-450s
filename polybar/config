@@ -291,9 +291,9 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 type = internal/battery
 battery = BAT1
 adapter = AC
-full-at = 64
+full-at = 99
 
-format-charging = <animation-charging> <label-charging>
+format-charging = chr <animation-charging> <label-charging>
 format-charging-underline = #ffb52a
 
 format-discharging = bat <ramp-capacity> <label-discharging>
