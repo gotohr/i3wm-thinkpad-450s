@@ -188,27 +188,27 @@ bindsym $mod+Shift+m mode "$mode_screen"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-#bar {
-#	position bottom
-#	# mode hide
-#	tray_output eDP1
-#       status_command i3status -c ~/.i3/i3status.conf
+bar {
+	position bottom
+	# mode hide
+	tray_output eDP1
+        status_command i3status -c ~/.i3/i3status.conf
 	
 	# $i3-theme-bar
-#	colors {
+	colors {
 		# <bar>
-#		background #47172c
-#		separator  #f37320
-#		statusline #aea79f
+		background #47172c
+		separator  #f37320
+		statusline #aea79f
 
 		# <workclass>       <border> <backgr.> <text>
-#		focused_workspace   #f47f31 #f37320 #ffffff
-#		active_workspace    #6c2e55 #61194a #ffffff
-#		inactive_workspace  #542937 #47172c #aea79f
-#		urgent_workspace    #f0be50 #efb73e #0000ff
-#	}
+		focused_workspace   #f47f31 #f37320 #ffffff
+		active_workspace    #6c2e55 #61194a #ffffff
+		inactive_workspace  #542937 #47172c #aea79f
+		urgent_workspace    #f0be50 #efb73e #0000ff
+	}
 
-#}
+}
 
 # $i3-theme-window
 # <clientclass>         <border> <backgr.> <text> <indicator>
@@ -268,7 +268,7 @@ exec clipit
 
 exec google-chrome
 
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+#exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 #exec /usr/bin/compton --config /home/joe/.compton.conf~.i3/config
 #exec /usr/bin/compton
