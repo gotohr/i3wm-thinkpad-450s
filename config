@@ -232,7 +232,7 @@ bindsym Mod1+Shift+Tab focus left
 bindsym $mod+Tab workspace next
 bindsym $mod+Shift+Tab workspace prev
 
-
+# https://askubuntu.com/questions/134668/how-to-trigger-a-color-inversion-effect-for-one-window
 bindsym $mod+i exec --no-startup-id xprop -id `xdotool getactivewindow` | grep WM_CLASS | awk '{print $4}' | xargs notify-send
 # | cut -d\" -f4 | xargs notify-send
 # $i3_path/invert_window.sh
