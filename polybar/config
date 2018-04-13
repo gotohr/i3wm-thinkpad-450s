@@ -9,7 +9,7 @@
 
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #222
+background = #001b36
 background-alt = #444
 ;foreground = ${xrdb:color7:#222}
 foreground = #dfdfdf
@@ -18,11 +18,11 @@ primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
 
-[bar/example]
-bottom = true
+[bar/eDP1]
+bottom = bottom
 monitor = ${env:MONITOR:}
 width = 100%
-height = 18
+height = 20
 ;offset-x = 1%
 ;offset-y = 1%
 radius = 3.0
@@ -31,20 +31,21 @@ fixed-center = false
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-line-size = 2
+line-size = 1
 line-color = #f00
 
-border-size = 4
-border-color = #00000000
+border-size = 1
+border-color = #110000
 
-padding-left = 0
+padding-left = 1
 padding-right = 2
 
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = fixed:pixelsize=10;1
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+#font-0 = pango:Source Sans Pro-10 10
+font-1 = fixed:pixelsize=10;1
+font-0 = unifont:fontformat=truetype:size=10:antialias=false;0
 font-2 = siji:pixelsize=10;1
 
 modules-left = bspwm i3
@@ -52,12 +53,12 @@ modules-center =
 modules-right = filesystem xbacklight volume xkeyboard memory cpu wlan eth battery temperature date powermenu
 
 tray-position = right
-tray-padding = 2
+tray-padding = 1
 tray-transparent = true
 tray-background = #0063ff
 
 ;wm-restack = bspwm
-;wm-restack = i3
+wm-restack = i3
 
 ;override-redirect = true
 
@@ -66,6 +67,64 @@ tray-background = #0063ff
 
 ;scroll-up = i3wm-wsnext
 ;scroll-down = i3wm-wsprev
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[bar/DP1]
+bottom = bottom
+monitor = ${env:MONITOR:}
+width = 100%
+height = 20
+;offset-x = 1%
+;offset-y = 1%
+radius = 3.0
+fixed-center = false
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 1
+line-color = #f00
+
+border-size = 1
+border-color = #110000
+
+padding-left = 1
+padding-right = 2
+
+font-0 = unifont:fontformat=truetype:size=10:antialias=false;0
+
+modules-left = bspwm i3
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[bar/DP2]
+bottom = bottom
+monitor = ${env:MONITOR:}
+width = 100%
+height = 20
+;offset-x = 1%
+;offset-y = 1%
+radius = 3.0
+fixed-center = false
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 1
+line-color = #f00
+
+border-size = 1
+border-color = #110000
+
+padding-left = 1
+padding-right = 2
+
+font-0 = unifont:fontformat=truetype:size=10:antialias=false;0
+
+modules-left = bspwm i3
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -195,7 +254,7 @@ interval = 2
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #f90000
-label = %percentage:2%%
+label =  %percentage:2%%
 
 [module/memory]
 type = internal/memory
@@ -340,7 +399,7 @@ expand-right = true
 
 format-spacing = 1
 
-label-open = 
+label-open =  PM
 label-open-foreground = ${colors.secondary}
 label-close =  cancel
 label-close-foreground = ${colors.secondary}
@@ -364,13 +423,13 @@ menu-2-1-exec = menu-open-0
 
 [settings]
 screenchange-reload = true
-;compositing-background = xor
-;compositing-background = screen
-;compositing-foreground = source
-;compositing-border = over
+compositing-background = xor
+#compositing-background = screen
+compositing-foreground = source
+compositing-border = over
 
 [global/wm]
-margin-top = 2
-margin-bottom = 2
+margin-top = 0
+margin-bottom = 0
 
 ; vim:ft=dosini

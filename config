@@ -1,10 +1,9 @@
 set $mod Mod4
 set $i3_path /home/cljubo/.i3
 
-set $OUTPUT_E DP2
-set $OUTPUT_DP HDM1 
-# DP1
-set $OUTPUT_I eDP1
+set $OUTPUT_V DP2
+set $OUTPUT_H DP1
+set $OUTPUT_MAIN eDP1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
@@ -13,7 +12,7 @@ font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
 # chose a FreeType font, such as:
-# font pango:DejaVu Sans Mono 10
+font pango:DejaVu Sans Mono 8
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -158,64 +157,100 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-set $mode_external_pos External screen position: ↑, →, ↓, ← (Shift for DisplayPort monitor)
+set $mode_external_pos External screen position: ↑, →, ↓, ← (Shift for VGA monitor)
 mode "$mode_external_pos" {
-        bindsym Left		exec xrandr --output $OUTPUT_E --auto --left-of $OUTPUT_I
-        bindsym Right		exec xrandr --output $OUTPUT_E --auto --right-of $OUTPUT_I
-        bindsym Up		exec xrandr --output $OUTPUT_E --auto --above $OUTPUT_I
-        bindsym Down		exec xrandr --output $OUTPUT_E --auto --below $OUTPUT_I
-        bindsym Shift+Left	exec xrandr --output $OUTPUT_DP --auto --left-of $OUTPUT_E
-        bindsym Shift+Right	exec xrandr --output $OUTPUT_DP --auto --right-of $OUTPUT_E
-        bindsym Shift+Up	exec xrandr --output $OUTPUT_DP --auto --above $OUTPUT_E
-        bindsym Shift+Down	exec xrandr --output $OUTPUT_DP --auto --below $OUTPUT_E
+        bindsym Left		exec xrandr --output $OUTPUT_H --auto --left-of $OUTPUT_MAIN
+        bindsym Right		exec xrandr --output $OUTPUT_H --auto --right-of $OUTPUT_MAIN
+        bindsym Up		exec xrandr --output $OUTPUT_H --auto --above $OUTPUT_MAIN
+        bindsym Down		exec xrandr --output $OUTPUT_H --auto --below $OUTPUT_MAIN
+        bindsym Shift+Left	exec xrandr --output $OUTPUT_V --auto --left-of $OUTPUT_E
+        bindsym Shift+Right	exec xrandr --output $OUTPUT_V --auto --right-of $OUTPUT_E
+        bindsym Shift+Up	exec xrandr --output $OUTPUT_V --auto --above $OUTPUT_E
+        bindsym Shift+Down	exec xrandr --output $OUTPUT_V --auto --below $OUTPUT_E
         # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
 bindsym $mod+Shift+s mode "$mode_external_pos"
 
-set $mode_screen Multi-monitor setup: (e)xternal only, (i)nternal only, (c)lone, (s)eparated
+set $mode_screen Multi-monitor setup: (e)xternal only, (i)nternal only, (c)lone, (s)eparated, (h) home dock
 mode "$mode_screen" {
-    bindsym c exec --no-startup-id xrandr --output $OUTPUT_E --auto --output $OUTPUT_I --auto
-    bindsym e exec --no-startup-id xrandr --output $OUTPUT_E --auto --output $OUTPUT_I --off
-    bindsym i exec --no-startup-id xrandr --output $OUTPUT_I --auto --output $OUTPUT_E --off && xrandr --output $OUTPUT_DP --off
-    bindsym s exec --no-startup-id xrandr --output $OUTPUT_I --auto && xrandr --output $OUTPUT_E --right-of $OUTPUT_I
+    bindsym c exec --no-startup-id xrandr --output $OUTPUT_H --auto --output $OUTPUT_MAIN --auto
+    bindsym e exec --no-startup-id xrandr --output $OUTPUT_H --auto --output $OUTPUT_MAIN --off
+    bindsym i exec --no-startup-id xrandr --output $OUTPUT_MAIN --auto --output $OUTPUT_H --off --output $OUTPUT_V --off
+    bindsym s exec --no-startup-id xrandr --output $OUTPUT_MAIN --auto --output $OUTPUT_V --right-of $OUTPUT_H
+    bindsym h exec --no-startup-id xrandr --output $OUTPUT_H --auto --above $OUTPUT_MAIN --output $OUTPUT_V --right-of $OUTPUT_H --rotate left
+
     # back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
 bindsym $mod+Shift+m mode "$mode_screen"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-#bar {
-#	position bottom
-#	# mode hide
-#	tray_output eDP1
-#       status_command i3status -c ~/.i3/i3status.conf
-	
-	# $i3-theme-bar
-#	colors {
-		# <bar>
-#		background #47172c
-#		separator  #f37320
-#		statusline #aea79f
+set $mode_bar_pos Bar position: (k) kill polybar, (a) all displays, (e) external setup
+mode "$mode_bar_pos" {
+    bindsym k exec --no-startup-id killall -q polybar
+    bindsym a exec --no-startup-id $HOME/.config/polybar/launch.sh
+    bindsym e exec --no-startup-id $HOME/.config/polybar/launch_with_externals.sh
 
-		# <workclass>       <border> <backgr.> <text>
-#		focused_workspace   #f47f31 #f37320 #ffffff
-#		active_workspace    #6c2e55 #61194a #ffffff
-#		inactive_workspace  #542937 #47172c #aea79f
-#		urgent_workspace    #f0be50 #efb73e #0000ff
-#	}
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Shift+p mode "$mode_bar_pos"
 
-#}
+# Start i3bar to display a workspace bar (plus the system information i3status finds out, if available)
+# bar {
+# 	position bottom
+# 	tray_output eDP1
+#     #status_command i3status -c ~/.i3/i3status.conf
+
+#     font pango:Source Sans Pro-10 10
+# 	# status_command i3blocks -c ~/.i3/i3blocks.conf	
+# 	# $i3-theme-bar
+
+#     colors {
+# 		# <bar>
+#         separator #268bd2
+#         background #002b36
+#         statusline #839496
+
+# 		# <workclass>       <border> <backgr.> <text>
+#         focused_workspace #fdf6e3 #6c71c4 #fdf6e3
+#         active_workspace #fdf6e3 #6c71c4 #fdf6e3
+#         inactive_workspace #002b36 #586e75 #002b36
+#         urgent_workspace #d33682 #d33682 #fdf6e3
+#     }
+
+# 	# colors {
+# 	# 	# <bar>
+# 	# 	background #47172c
+# 	# 	separator  #f37320
+# 	# 	statusline #aea79f
+
+# 	# 	# <workclass>       <border> <backgr.> <text>
+# 	# 	focused_workspace   #f47f31 #f37320 #ffffff
+# 	# 	active_workspace    #6c2e55 #61194a #ffffff
+# 	# 	inactive_workspace  #542937 #47172c #aea79f
+# 	# 	urgent_workspace    #f0be50 #efb73e #0000ff
+# 	# }
+# }
+
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
 
 # $i3-theme-window
+
 # <clientclass>         <border> <backgr.> <text> <indicator>
-client.focused          #b64f0a #60561c #ffffff #f58c46
-client.focused_inactive #6c2e55 #61194a #ffffff #774060
-client.unfocused        #542937 #47172c #aea79f #603944
-client.urgent           #f0be50 #efb73e #ffffff #efb73e
+#client.focused          #b64f0a #60561c #ffffff #f58c46
+#client.focused_inactive #6c2e55 #61194a #ffffff #774060
+#client.unfocused        #542937 #47172c #aea79f #603944
+#client.urgent           #f0be50 #efb73e #ffffff #efb73e
+
+client.focused #000000 #014b87 #ffffff #220000
+client.unfocused #1F3331 #585858 #ECF0F1 #2C3E50
+client.focused_inactive #514163 #222222 #ECF0F1 #2C3E50
+client.urgent #3498DB #2C3E50 #ECF0F1 #2C3E50
 
 # $i3-background
 # exec_always --no-startup-id xsetroot -solid '#542937'
@@ -233,13 +268,13 @@ bindsym $mod+Tab workspace next
 bindsym $mod+Shift+Tab workspace prev
 
 # https://askubuntu.com/questions/134668/how-to-trigger-a-color-inversion-effect-for-one-window
-bindsym $mod+i exec --no-startup-id xprop -id `xdotool getactivewindow` | grep WM_CLASS | awk '{print $4}' | xargs notify-send
-# | cut -d\" -f4 | xargs notify-send
+#bindsym $mod+i exec --no-startup-id xprop -id `xdotool getactivewindow` | grep WM_CLASS | awk '{print $4}' | xargs notify-send | cut -d\" -f4 | xargs notify-send
 # $i3_path/invert_window.sh
+
 # https://github.com/zoltanp/xrandr-invert-colors
-bindsym $mod+Shift+i exec xrandr-invert-colors -s 0
-bindsym $mod+Control+i exec xrandr-invert-colors -s 1
-bindsym $mod+Control+Shift+i exec xrandr-invert-colors -s 2
+bindsym $mod+i exec xrandr-invert-colors -s 0
+bindsym $mod+Shift+i exec xrandr-invert-colors -s 1
+bindsym $mod+Mod1+i exec xrandr-invert-colors -s 2
 
 bindsym $mod+Mod1+Left move workspace to output left
 bindsym $mod+Mod1+Right move workspace to output right
@@ -277,8 +312,7 @@ exec --no-startup-id feh --bg-scale ~/Pictures/i3wm_wallpaper.jpg
 exec clipit
 
 exec google-chrome
-
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec --no-startup-id xfce4-power-manager
 
 #exec /usr/bin/compton --config /home/joe/.compton.conf~.i3/config
 #exec /usr/bin/compton
