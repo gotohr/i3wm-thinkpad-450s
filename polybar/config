@@ -9,7 +9,7 @@
 
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #001b36
+background = #113b26
 background-alt = #444
 ;foreground = ${xrdb:color7:#222}
 foreground = #dfdfdf
@@ -19,7 +19,7 @@ secondary = #e60053
 alert = #bd2c40
 
 [bar/eDP1]
-bottom = bottom
+bottom = true
 monitor = ${env:MONITOR:}
 width = 100%
 height = 20
@@ -44,8 +44,8 @@ module-margin-left = 1
 module-margin-right = 2
 
 #font-0 = pango:Source Sans Pro-10 10
-font-1 = fixed:pixelsize=10;1
-font-0 = unifont:fontformat=truetype:size=10:antialias=false;0
+font-0 = fixed:pixelsize=10;1
+font-1 = unifont:fontformat=truetype:size=10:antialias=false;0
 font-2 = siji:pixelsize=10;1
 
 modules-left = bspwm i3
@@ -54,7 +54,7 @@ modules-right = filesystem xbacklight volume xkeyboard memory cpu wlan eth batte
 
 tray-position = right
 tray-padding = 1
-tray-transparent = true
+tray-transparent = false
 tray-background = #0063ff
 
 ;wm-restack = bspwm
@@ -72,7 +72,7 @@ cursor-click = pointer
 cursor-scroll = ns-resize
 
 [bar/DP1]
-bottom = bottom
+bottom = true
 monitor = ${env:MONITOR:}
 width = 100%
 height = 20
@@ -101,7 +101,7 @@ cursor-click = pointer
 cursor-scroll = ns-resize
 
 [bar/DP2]
-bottom = bottom
+bottom = true
 monitor = ${env:MONITOR:}
 width = 100%
 height = 20
